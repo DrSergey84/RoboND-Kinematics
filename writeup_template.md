@@ -59,4 +59,4 @@ The handle_calculate_IK function is pretty small and straight-forward. I was bas
 
 ![Pick&Place](https://github.com/DrSergey84/RoboND-Kinematics/blob/master/pictures/default_gzclient_camera(1)-2018-04-02T12_34_14.500741.jpg)
 
-
+The arm has troubles picking the objects ( seems like the ones located on the left from it ). Either I do press 'Next' to early or it is just a wrong math. This is needs to be debugged further perhaps.
