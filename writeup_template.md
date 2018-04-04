@@ -44,8 +44,6 @@ DH table for Kuka210 has been shown in one of the lecture videos (see "KR210 For
 
 ![Theta2 and Theta3 image](https://github.com/DrSergey84/RoboND-Kinematics/blob/master/pictures/l21-l-inverse-kinematics-new-design-fixed.png)
 
-Θ
-
 On the image above the angles *a* , *b* and *c* can be obtained using a cosine theorem, for that we need to figure first *A*, *B* and *C* values for the triangle. *C* is a distance from link 2 to link 3 which can be obtained from DH table (a2 parameter which is a distance from Z<sub>2</sub>  to Z<sub>3</sub> measured over X<sub>2</sub>) as it is shown on the image below.
 
 ![Kuka](./pictures/forward_kinematics.png)
@@ -55,7 +53,19 @@ In order to figure *A* we can look at the image above, where WC is O4,O5,O6. d4 
 
 In order to figure out *B* we can build another right triangle.  sides by substracting d1 from WCz ( d is a distance between Xs measured along Z) and a1 from the projection of the WC on ZY plane.
 
-For finding Theta3, 4, 5  see the comment section in the beggining of *handle_calculate_IK*  function in ![IK_server](https://github.com/DrSergey84/RoboND-Kinematics/blob/master/IK_server.py)
+
+For finding Theta3, 4, 5  let's see how R0_3 matrix looks like
+
+```
+R3_6 = Matrix([ [-sin(theta4)*sin(theta6) + cos(theta4)*cos(theta5)*cos(theta6), -sin(theta4)*cos(theta6) - sin(theta6)*cos(theta4)*cos(theta5), -sin(theta5)*cos(theta4)], 
+                [sin(theta5)*cos(theta6),                                        -sin(theta5)*sin(theta6),                                       cos(theta5),              ], 
+                [-sin(theta4)*cos(theta5)*cos(theta6) - sin(theta6)*cos(theta4), sin(theta4)*sin(theta6)*cos(theta5) - cos(theta4)*cos(theta6), sin(theta4)*sin(theta5)] ])
+```
+
+
+From above we can observe that R<sub>2,2</sub>/-R<sub>0,2</sub> = tan(theta4) or equivalently theta4 = atan2(R<sub>2,2</sub>, -R<sub>0,2</sub>)
+Similarly -R<sub>1,1</sub>/R<sub>1,0</sub> = tan(theta6) and equivalently theta6 = atan2(-R<sub>1,1</sub>, R<sub>1,0</sub>)
+Now, when we known theta4 and theta6,  sin(theta4) is a known value (f.ex. C) we denote that R<sub>2,2</sub>/R<sub>1,2</sub> = C*tan(theta5), or theta5 = atan2(R<sub>2,2</sub>, C * R<sub>1,2</sub>).
 
 ### Project Implementation
 
