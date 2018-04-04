@@ -18,6 +18,7 @@ from geometry_msgs.msg import Pose
 from mpmath import *
 from numpy import *
 
+
 # c^2 = a ^2 + b^2 - 2*a*b*cos(alpha)
 # cos(alpha) = -(c^2 - a^2 - b^2)/ (2*a*b)
 # cos(alpha) = (a^2 + b^2 - c^2) / (2*a*b)
@@ -25,7 +26,7 @@ from numpy import *
 def angle_from_cosine_theorem(a, b, c):
   cos_alpha = (a*a + b*b - c*c) / (2*a*b)
   sin_alpha = sqrt( 1.0 - cos_alpha**2)
-  return atan2( sin_alpha, cos_alpha )
+  return arctan2( sin_alpha, cos_alpha )
 
 def handle_calculate_IK(req):
     rospy.loginfo("Received %s eef-poses from the plan" % len(req.poses))
@@ -97,7 +98,7 @@ def handle_calculate_IK(req):
 	#               [-sin(-np.pi/2),0, cos(-np.pi/2), 0],
 	#               ]0,             0,       0,       1]])
 	# Below is the result of R_z * Ry multiplication of the matrices above
-	R_corr = Matrix([[0, 0, 1], [0, -1, 0], [1, 0, 0]])
+	R_corr = matrix([[0, 0, 1], [0, -1, 0], [1, 0, 0]])
 
         # Initialize service response
         joint_trajectory_list = []
@@ -131,6 +132,7 @@ def handle_calculate_IK(req):
 	                    [ 0,              0,        1]])
 
 	    Rrpy = DH_R_z * DH_R_y * DH_R_x * R_corr
+
 	    # Get the end reflector Z vector
 	    nx = Rrpy[0, 2]
 	    ny = Rrpy[1, 2]
@@ -144,13 +146,7 @@ def handle_calculate_IK(req):
 	    wz = pz - (d6 + l)*nz
 	    #
 	    # Calculate joint angles using Geometric IK method
-	    # Seems like test case 2 from IK_debug.py is achieving way better results for Theta1 with wx,wy swapped
-	    # This is probably comes from the fact that the (x,y) values of the wrist center have different signs,
-	    # i.e. it  is somewhat reflected against the origin.
-	    if ( wy < 0 ):
-	      theta1 = atan2(wy,wx)
-	    else:
-	      theta1 = atan2(wy,wx)
+	    theta1 = arctan2(wy,wx)
 
 	    link_2_3 = 1.25 # link 2 to 3 distance
 	    link_3_wc = sqrt(1.5**2 + (-0.054)**2) # link3 to wc distance
@@ -160,8 +156,8 @@ def handle_calculate_IK(req):
 	    a = angle_from_cosine_theorem( link_2_3, link_2_wc, link_3_wc)
 	    b = angle_from_cosine_theorem( link_2_3, link_3_wc, link_2_wc)
 	    c = angle_from_cosine_theorem( link_2_wc, link_3_wc, link_2_3)
-	    theta2 = pi / 2 - a - atan2(z_pos, y_pos) 
-	    theta3 = -(b - atan2(1.5, 0.054)) 
+	    theta2 = pi / 2 - a - arctan2(z_pos, y_pos) 
+	    theta3 = -(b - arctan2(1.5, 0.054)) 
 
 	    #Pre-compute sin/cos values of thetas 1,2 and 3. Not sure if python is a smart enough to do it by itself
 	    c_t1 = cos(theta1)
@@ -182,14 +178,14 @@ def handle_calculate_IK(req):
 	    R0_3_inv = R0_3.transpose()
 	    R3_6 = R0_3_inv * Rrpy
 	    #Now get the joint 4,5,6 parameters
-	    theta4 = atan2(R3_6[2,2], -R3_6[0,2])
-	    theta6 = atan2(-R3_6[1,1], R3_6[1,0])
+	    theta4 = arctan2(R3_6[2,2], -R3_6[0,2])
+	    theta6 = arctan2(-R3_6[1,1], R3_6[1,0])
 	    #The effector doesn;t take the right position when sin is negative without this
 	    # adjustment. For inst. it can never drop a can into the bin properly.
 	    if (sin(theta4) > 0 ):
-	       theta5 = atan2(R3_6[2,2], sin(theta4) * R3_6[1,2])
+	        theta5 = arctan2(R3_6[2,2], sin(theta4) * R3_6[1,2])
 	    else:
-	       theta5 = atan2(-R3_6[2,2], sin(theta4) * R3_6[1,2])
+	        theta5 = arctan2(-R3_6[2,2], sin(theta4) * R3_6[1,2])
 
             # Populate response for the IK request
             # In the next line replace theta1,theta2...,theta6 by your joint angle variables
