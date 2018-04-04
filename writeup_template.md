@@ -54,7 +54,7 @@ In order to figure *A* we can look at the image above, where WC is O4,O5,O6. d4 
 In order to figure out *B* we can build another right triangle.  sides by substracting d1 from WCz ( d is a distance between Xs measured along Z) and a1 from the projection of the WC on ZY plane.
 
 
-For finding Theta3, 4, 5  let's see how R0_3 matrix looks like
+For finding Theta3, 4, 5  let's see how R<sub>3,6</sub> matrix looks like
 
 ```
 R3_6 = Matrix([ [-sin(theta4)*sin(theta6) + cos(theta4)*cos(theta5)*cos(theta6), -sin(theta4)*cos(theta6) - sin(theta6)*cos(theta4)*cos(theta5), -sin(theta5)*cos(theta4)], 
