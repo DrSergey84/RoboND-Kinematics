@@ -16,14 +16,16 @@ from kuka_arm.srv import *
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 from geometry_msgs.msg import Pose
 from mpmath import *
-from sympy import *
+from numpy import *
 
 # c^2 = a ^2 + b^2 - 2*a*b*cos(alpha)
 # cos(alpha) = -(c^2 - a^2 - b^2)/ (2*a*b)
 # cos(alpha) = (a^2 + b^2 - c^2) / (2*a*b)
-# alpha = acos( (a^2 + b^2 - c^2) / (2*a*b) )
+# alpha = atan2( sin(alpha), cos(alpha) )
 def angle_from_cosine_theorem(a, b, c):
-  return acos( (a*a + b*b - c*c) / (2*a*b) )
+  cos_alpha = (a*a + b*b - c*c) / (2*a*b)
+  sin_alpha = sqrt( 1.0 - cos_alpha**2)
+  return atan2( sin_alpha, cos_alpha )
 
 def handle_calculate_IK(req):
     rospy.loginfo("Received %s eef-poses from the plan" % len(req.poses))
@@ -116,15 +118,15 @@ def handle_calculate_IK(req):
 
 	    # Define Rrpy rotation matrix including a compensation 
 	    # for rotation discrepancy between DH parameters and Gazebo
-	    DH_R_x = Matrix([[ 1,              0,        0],
+	    DH_R_x = matrix([[ 1,              0,        0],
 	                     [ 0,        cos(roll), -sin(roll)],
 	                     [ 0,        sin(roll),  cos(roll)]])
 
-	    DH_R_y = Matrix([[ cos(pitch),     0,  sin(pitch)],
+	    DH_R_y = matrix([[ cos(pitch),     0,  sin(pitch)],
 	                     [       0,        1,        0],
 	                     [-sin(pitch),     0,  cos(pitch)]])
 
-	    DH_R_z = Matrix([[ cos(yaw), -sin(yaw),     0],
+	    DH_R_z = matrix([[ cos(yaw), -sin(yaw),     0],
 	                    [ sin(yaw),  cos(yaw),      0],
 	                    [ 0,              0,        1]])
 
@@ -172,11 +174,12 @@ def handle_calculate_IK(req):
 	    s_t2_t3 = s_t2 * s_t3
 	    s_t2_c_t3 = s_t2 * c_t3
 	    # And get R3_6 matrix to extract the joint 4,5,6 parameters
-	    R0_3 = Matrix([ [s_t2_c_t3*c_t1 + s_t3*c_t1*c_t2, -s_t2_t3*c_t1 + c_t1*c_t2_t3, -s_t1],
+	    R0_3 = matrix([ [s_t2_c_t3*c_t1 + s_t3*c_t1*c_t2, -s_t2_t3*c_t1 + c_t1*c_t2_t3, -s_t1],
                             [s_t1*s_t2_c_t3 + s_t1*s_t3*c_t2, -s_t1*s_t2_t3 + s_t1*c_t2_t3, c_t1],
                             [-s_t2_t3 + c_t2_t3, -s_t2*c_t3 - s_t3*c_t2, 0]])
 
-	    R0_3_inv = R0_3.inv("LU")
+	    # Since rotation matrix is orthogonal it's inverse is equal to it's transpose
+	    R0_3_inv = R0_3.transpose()
 	    R3_6 = R0_3_inv * Rrpy
 	    #Now get the joint 4,5,6 parameters
 	    theta4 = atan2(R3_6[2,2], -R3_6[0,2])
