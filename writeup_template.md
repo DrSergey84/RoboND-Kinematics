@@ -47,6 +47,11 @@ This has been done in the lectures ( see "KR210 Forward Kinematics 3"). What is 
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
 
+θ<sub>1</sub> is an angle betwwen X<sub>0</sub> and X<sub>1</sub> measured over Z<sub>1</sub>. Note that joint's 1  X axis rotation is rigid with the WC. Below picture is illustrating θ<sub>1</sub> calculation approach:
+
+![Picture 3](./pictures/theta1.jpg)
+
+
 ![Theta2 and Theta3 image](https://github.com/DrSergey84/RoboND-Kinematics/blob/master/pictures/l21-l-inverse-kinematics-new-design-fixed.png)
 
 On the image above the angles *a* , *b* and *c* can be obtained using a cosine theorem, for that we need to figure first *A*, *B* and *C* values for the triangle. *C* is a distance from link 2 to link 3 which can be obtained from DH table (a2 parameter which is a distance from Z<sub>2</sub>  to Z<sub>3</sub> measured over X<sub>2</sub>) as it is shown on the forward kinematics picture above.
