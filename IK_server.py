@@ -98,7 +98,7 @@ def handle_calculate_IK(req):
 	#               [-sin(-np.pi/2),0, cos(-np.pi/2), 0],
 	#               ]0,             0,       0,       1]])
 	# Below is the result of R_z * Ry multiplication of the matrices above
-	R_corr = matrix([[0, 0, 1], [0, -1, 0], [1, 0, 0]])
+	#R_corr = matrix([[0, 0, 1], [0, -1, 0], [1, 0, 0]])
 
         # Initialize service response
         joint_trajectory_list = []
@@ -119,19 +119,29 @@ def handle_calculate_IK(req):
 
 	    # Define Rrpy rotation matrix including a compensation 
 	    # for rotation discrepancy between DH parameters and Gazebo
-	    DH_R_x = matrix([[ 1,              0,        0],
-	                     [ 0,        cos(roll), -sin(roll)],
-	                     [ 0,        sin(roll),  cos(roll)]])
+	    #DH_R_x = matrix([[ 1,              0,        0],
+	    #                 [ 0,        c_roll, -s_roll],
+	    #                 [ 0,        s_roll,  c_roll]])
 
-	    DH_R_y = matrix([[ cos(pitch),     0,  sin(pitch)],
-	                     [       0,        1,        0],
-	                     [-sin(pitch),     0,  cos(pitch)]])
+	    #DH_R_y = matrix([[ c_pitch,     0,  s_pitch],
+	    #                 [       0,        1,        0],
+	    #                 [-s_pitch,     0,  c_pitch]])
 
-	    DH_R_z = matrix([[ cos(yaw), -sin(yaw),     0],
-	                    [ sin(yaw),  cos(yaw),      0],
-	                    [ 0,              0,        1]])
+	    #DH_R_z = matrix([[ c_yaw, -s_yaw,     0],
+	    #                [ s_yaw,  c_yaw,      0],
+	    #                [ 0,              0,        1]])
 
-	    Rrpy = DH_R_z * DH_R_y * DH_R_x * R_corr
+	    #Rrpy = DH_R_z * DH_R_y * DH_R_x * R_corr
+	    s_pitch = sin(pitch)
+	    c_pitch = cos(pitch)
+	    s_roll = sin(roll)
+	    c_roll = cos(roll)
+	    s_yaw = sin(yaw)
+	    c_yaw = cos(yaw)
+
+	    Rrpy = matrix([ [s_pitch*c_roll*c_yaw + s_roll*s_yaw, -s_pitch*s_roll*c_yaw + s_yaw*c_roll, c_pitch*c_yaw], 
+	                    [s_pitch*s_yaw*c_roll - s_roll*c_yaw, -s_pitch*s_roll*s_yaw - c_roll*c_yaw, s_yaw*c_pitch], 
+	                    [c_pitch*c_roll, -s_roll*c_pitch, -s_pitch] ])
 
 	    # Get the end reflector Z vector
 	    nx = Rrpy[0, 2]
