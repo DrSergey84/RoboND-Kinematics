@@ -46,7 +46,7 @@ DH table is obtained basing on the below forward kinematics picture and kr210.ur
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
 
-θ<sub>1</sub> is an angle betwwen X<sub>0</sub> and X<sub>1</sub> measured over Z<sub>1</sub>. Note that joint's 1  X axis rotation is rigid with the WC. Below picture is illustrating θ<sub>1</sub> calculation approach:
+θ<sub>1</sub> is an angle betwwen X<sub>0</sub> and X<sub>1</sub> measured over Z<sub>1</sub>. Note that when joint 1  X axis is rotated by construction  WC will be rigidly rotated with it. Below picture is illustrating θ<sub>1</sub> calculation approach:
 
 ![Picture 3](./pictures/theta1.jpg)
 
