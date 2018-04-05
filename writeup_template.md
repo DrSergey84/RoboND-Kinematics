@@ -43,7 +43,6 @@ DH table is obtained basing on the below forward kinematics picture and kr210.ur
 
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
 
-This has been done in the lectures ( see "KR210 Forward Kinematics 3"). What is the point to duplicate ?
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
 
@@ -51,8 +50,12 @@ This has been done in the lectures ( see "KR210 Forward Kinematics 3"). What is 
 
 ![Picture 3](./pictures/theta1.jpg)
 
+**Note that joints enumeration on the picture above is wrong, it should be 0,1,2,3,4 as the XY axises obviously belomg to the base frame ( I missed one node there). But it doesn't change the idea behind it in anyways**.
 
-![Theta2 and Theta3 image](https://github.com/DrSergey84/RoboND-Kinematics/blob/master/pictures/l21-l-inverse-kinematics-new-design-fixed.png)
+θ<sub>2</sub> is an angle betwwen X<sub>1</sub> and X<sub>2</sub> measured over Z<sub>2</sub>. On the picture below θ<sub>2</sub> is shown on the XY plane assosiated with frame 2, from where θ<sub>2</sub> = pi/2 - a - atan(x,y) ,where (x,y) are the coordinates of the point of WC projection on that plane. Now let's make a simple observation that frame2 origin has a fixed offset (a<sub>1</sub>, d<sub>1</sub>) from frame 0 in frame0's coordinate system.  From the previous picture where θ<sub>1</sub> was drawn we can figure that X<sub>1</sub> is projected on hepotenus of a triangle with the sides equal (WC<sub>x</sub>, WC<sub>y</sub>) which makes it to be sqrt(WCx^2 + WCy^2), or expressed in terms of the base frame it is sqrt(WCx^2 + WCy^2) - a1, but X<sub>1</sub> is collinear with Y<sub>2</sub> as it follows from the  forward kinematics picture. Also, since the projection on XY is done along Z axis, x coordinate in terms of the base frame  would be x = WCz - d<sub>1</sub>.  
+
+
+![Theta2 and Theta3 image](./pictures/l21-l-inverse-kinematics-new-design-fixed.png)
 
 On the image above the angles *a* , *b* and *c* can be obtained using a cosine theorem, for that we need to figure first *A*, *B* and *C* values for the triangle. *C* is a distance from link 2 to link 3 which can be obtained from DH table (a2 parameter which is a distance from Z<sub>2</sub>  to Z<sub>3</sub> measured over X<sub>2</sub>) as it is shown on the forward kinematics picture above.
 
