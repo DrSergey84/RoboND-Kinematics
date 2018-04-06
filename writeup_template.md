@@ -38,7 +38,11 @@ You're reading it!
 
 DH table is obtained basing on the below forward kinematics picture and kr210.urdf.xacro file:
 
-![Picture 2](./pictures/forward_kinematics.png)
+![Picture 1.1](./pictures/forward_kinematics.png)
+
+where
+![Picture 1.2](./pictures/DH_parameters.png)
+
 
 
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
