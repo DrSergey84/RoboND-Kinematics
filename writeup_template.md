@@ -57,9 +57,10 @@ DH table is obtained basing on the below forward kinematics picture and kr210.ur
 
 ![Theta2 and Theta3 image](./pictures/l21-l-inverse-kinematics-new-design-fixed.png)
 
+θ<sub>3</sub> is an angle between X<sub>2</sub> and X<sub>3</sub> measured over Z<sub>3</sub>. From the picture below we can conclude that θ<sub>3</sub> = (b - d), where d = atan2(d4,a3). 
+
 ![Picture 4](./pictures/theta3.png)
 
-θ<sub>3</sub> is an angle between X<sub>2</sub> and X<sub>3</sub> measured over Z<sub>3</sub>. From the picture above we can conclude that θ<sub>3</sub> = (b - d), where d = atan2(d4,a3). 
 
 On the image above the angles *a* , *b* and *c* can be obtained using a cosine theorem, for that we need to figure first *A*, *B* and *C* values for the triangle. *C* is a distance from link 2 to link 3 which can be obtained from DH table (a2 parameter which is a distance from Z<sub>2</sub>  to Z<sub>3</sub> measured over X<sub>2</sub>) as it is shown on the forward kinematics picture above.
 
