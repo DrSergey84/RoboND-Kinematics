@@ -71,8 +71,7 @@ On the image above the angles *a* , *b* and *c* can be obtained using a cosine t
 
 In order to figure *A* we can look at the picture above. d4 and a3  there define the sides of a right triangle and from there we can figure *A*. d4 is the distance from X3 to X4 over Z4 and a3 is the distance from Z3 to Z4 over X3.
 
-In order to figure out *B* we can build another right triangle.  sides by substracting d1 from WCz ( d is a distance between Xs measured along Z) and a1 from the projection of the WC on ZY plane.
-
+As follows from above *B* is a hepotenus of the another right triangle with the sides  y = sqrt(x<sub>c</sub>^2 + y<sub>c</sub>^2) - a<sub>1</sub> and x = z<sub>c</sub> - d<sub>1</sub>.
 
 For finding θ<sub>4</sub>, θ<sub>5</sub> and θ<sub>6</sub>  let's see how R<sub>3,6</sub> matrix looks like
 
