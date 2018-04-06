@@ -44,6 +44,7 @@ DH table is obtained basing on the below forward kinematics picture and kr210.ur
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
 ![Picture 2.1](./pictures/T1-4.png)
 ![Picture 2.2](./pictures/T4-G.png)
+![Picture 2.3](./pictures/T_Total.png)
 
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
