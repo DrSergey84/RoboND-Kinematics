@@ -138,9 +138,12 @@ def handle_calculate_IK(req):
 	    c_roll = cos(roll)
 	    s_yaw = sin(yaw)
 	    c_yaw = cos(yaw)
+	    s_pitch_s_roll = s_pitch * s_roll
+	    c_roll_c_yaw = c_roll * c_yaw
+	    s_yaw_c_roll = s_yaw * c_roll
 
-	    Rrpy = matrix([ [s_pitch*c_roll*c_yaw + s_roll*s_yaw, -s_pitch*s_roll*c_yaw + s_yaw*c_roll, c_pitch*c_yaw], 
-	                    [s_pitch*s_yaw*c_roll - s_roll*c_yaw, -s_pitch*s_roll*s_yaw - c_roll*c_yaw, s_yaw*c_pitch], 
+	    Rrpy = matrix([ [s_pitch*c_roll_c_yaw + s_roll*s_yaw, -s_pitch_s_roll*c_yaw + s_yaw_c_roll, c_pitch*c_yaw], 
+	                    [s_pitch*s_yaw_c_roll - s_roll*c_yaw, -s_pitch_s_roll*s_yaw - c_roll_c_yaw, s_yaw*c_pitch], 
 	                    [c_pitch*c_roll, -s_roll*c_pitch, -s_pitch] ])
 
 	    # Get the end reflector Z vector
@@ -179,23 +182,23 @@ def handle_calculate_IK(req):
 	    c_t2_t3 = c_t2 * c_t3
 	    s_t2_t3 = s_t2 * s_t3
 	    s_t2_c_t3 = s_t2 * c_t3
-	    # And get R3_6 matrix to extract the joint 4,5,6 parameters
-	    R0_3 = matrix([ [s_t2_c_t3*c_t1 + s_t3*c_t1*c_t2, -s_t2_t3*c_t1 + c_t1*c_t2_t3, -s_t1],
-                            [s_t1*s_t2_c_t3 + s_t1*s_t3*c_t2, -s_t1*s_t2_t3 + s_t1*c_t2_t3, c_t1],
-                            [-s_t2_t3 + c_t2_t3, -s_t2*c_t3 - s_t3*c_t2, 0]])
-
 	    # Since rotation matrix is orthogonal it's inverse is equal to it's transpose
-	    R0_3_inv = R0_3.transpose()
+	    R0_3_inv = matrix([ [s_t2_c_t3*c_t1 + s_t3*c_t1*c_t2, -s_t2_t3*c_t1 + c_t1*c_t2_t3, -s_t1],
+                            [s_t1*s_t2_c_t3 + s_t1*s_t3*c_t2, -s_t1*s_t2_t3 + s_t1*c_t2_t3, c_t1],
+                            [-s_t2_t3 + c_t2_t3, -s_t2*c_t3 - s_t3*c_t2, 0]]).getT()
+
 	    R3_6 = R0_3_inv * Rrpy
 	    #Now get the joint 4,5,6 parameters
 	    theta4 = arctan2(R3_6[2,2], -R3_6[0,2])
 	    theta6 = arctan2(-R3_6[1,1], R3_6[1,0])
-	    #The effector doesn;t take the right position when sin is negative without this
-	    # adjustment. For inst. it can never drop a can into the bin properly.
-	    if (sin(theta4) > 0 ):
-	        theta5 = arctan2(R3_6[2,2], sin(theta4) * R3_6[1,2])
+	    #The effector doesn't take the right position when sin(theta4) is negative without this
+	    # adjustment. For inst. it sometimes cannot  drop a can into the bin properly due 
+	    # to the wrong orientation of the gripper.
+	    s_theta4 = sin(theta4)
+	    if (s_theta4 > 0 ):
+	        theta5 = arctan2(R3_6[2,2], s_theta4 * R3_6[1,2])
 	    else:
-	        theta5 = arctan2(-R3_6[2,2], sin(theta4) * R3_6[1,2])
+	        theta5 = arctan2(-R3_6[2,2], s_theta4 * R3_6[1,2])
 
             # Populate response for the IK request
             # In the next line replace theta1,theta2...,theta6 by your joint angle variables
