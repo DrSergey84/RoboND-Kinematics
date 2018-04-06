@@ -55,8 +55,6 @@ DH table is obtained basing on the below forward kinematics picture and kr210.ur
 θ<sub>2</sub> is an angle between X<sub>1</sub> and X<sub>2</sub> measured over Z<sub>2</sub>. On the picture below θ<sub>2</sub> is shown on the X<sub>2</sub>Y<sub>2</sub> plane, from where θ<sub>2</sub> = pi/2 - a - atan(x,y) ,where (x,y) are the coordinates of the point of WC projected on that plane. Now let's make a simple observation that frame2 origin has a fixed offset (a<sub>1</sub>, d<sub>1</sub>) from frame 0 in frame0's coordinate system.  From the previous picture where θ<sub>1</sub> was drawn we can figure that X<sub>1</sub> is projected on hepotenus of a triangle with the sides equal to (x<sub>c</sub>, y<sub>c</sub>) which makes it to be sqrt(xc^2 + yc^2), or expressed in terms of the base frame it is sqrt(x<sub>c</sub>^2 + y</sub>c</sub>^2) - a1, but on X<sub>0</sub>Y<sub>0</sub> plane X<sub>1</sub> is collinear with Y<sub>2</sub> as it follows from the  forward kinematics picture, thus y = sqrt(x<sub>c</sub>^2 + y<sub>c</sub>^2) - a<sub>1</sub> . Also, since the projection is done along Z axis, x coordinate in terms of the base frame  would be x = z<sub>c</sub> - d<sub>1</sub>.  
 
 
-![Theta2 and Theta3 image](./pictures/l21-l-inverse-kinematics-new-design-fixed.png)
-
 θ<sub>3</sub> is an angle between X<sub>2</sub> and X<sub>3</sub> measured over Z<sub>3</sub>. From the picture below we can conclude that θ<sub>3</sub> = (b - d), where d = atan2(d4,a3). 
 
 ![Picture 4](./pictures/theta3.png)
