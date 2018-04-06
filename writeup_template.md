@@ -62,14 +62,14 @@ where
 θ<sub>2</sub> is an angle between X<sub>1</sub> and X<sub>2</sub> measured over Z<sub>2</sub>. On the picture below θ<sub>2</sub> is shown on the X<sub>2</sub>Y<sub>2</sub> plane, from where θ<sub>2</sub> = pi/2 - a - atan(x,y) ,where (x,y) are the coordinates of the point of WC projected on that plane. Now let's make a simple observation that frame2 origin has a fixed offset (a<sub>1</sub>, d<sub>1</sub>) from frame 0 in frame0's coordinate system.  From the previous picture where θ<sub>1</sub> was drawn we can figure that X<sub>1</sub> is projected on hepotenus of a triangle with the sides equal to (x<sub>c</sub>, y<sub>c</sub>) which makes it to be sqrt(xc^2 + yc^2), or expressed in terms of the base frame it is sqrt(x<sub>c</sub>^2 + y</sub>c</sub>^2) - a1, but on X<sub>0</sub>Y<sub>0</sub> plane X<sub>1</sub> is collinear with Y<sub>2</sub> as it follows from the  forward kinematics picture, thus y = sqrt(x<sub>c</sub>^2 + y<sub>c</sub>^2) - a<sub>1</sub> . Also, since the projection is done along Z axis, x coordinate in terms of the base frame  would be x = z<sub>c</sub> - d<sub>1</sub>.  
 
 
-θ<sub>3</sub> is an angle between X<sub>2</sub> and X<sub>3</sub> measured over Z<sub>3</sub>. From the picture below we can conclude that θ<sub>3</sub> = (b - d), where d = atan2(d4,a3). 
+θ<sub>3</sub> is an angle between X<sub>2</sub> and X<sub>3</sub> measured over Z<sub>3</sub>. From the picture below we can conclude that θ<sub>3</sub> = (b - d), where d = atan2(d4,-a3). 
 
 ![Picture 4](./pictures/theta3.png)
 
 
 On the image above the angles *a* , *b* and *c* can be obtained using a cosine theorem, for that we need to figure first *A*, *B* and *C* values for the triangle. *C* is a distance from link 2 to link 3 which can be obtained from DH table (a2 parameter which is a distance from Z<sub>2</sub>  to Z<sub>3</sub> measured over X<sub>2</sub>) as it is shown on the forward kinematics picture above.
 
-In order to figure *A* we can look at the "forward kinematics" image above , where WC is O4,O5,O6. d4 and a3  there define the sides of a right triangle and from there we can figure the *A*. d4 is the distance from X3 to X4 over Z4 and a3 is the distance from Z3 to Z4 over X3.
+In order to figure *A* we can look at the picture above. d4 and a3  there define the sides of a right triangle and from there we can figure *A*. d4 is the distance from X3 to X4 over Z4 and a3 is the distance from Z3 to Z4 over X3.
 
 In order to figure out *B* we can build another right triangle.  sides by substracting d1 from WCz ( d is a distance between Xs measured along Z) and a1 from the projection of the WC on ZY plane.
 
