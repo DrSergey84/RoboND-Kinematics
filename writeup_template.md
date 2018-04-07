@@ -49,7 +49,7 @@ The first raw of DH parameters: (  α<sub>0</sub>, a<sub>0</sub>, d<sub>1</sub> 
 (  0, 0, 0.75 , θ<sub>1</sub>)
 ```
 
-α<sub>1</sub> is an angle between Z<sub>1</sub> and Z<sub>2</sub> measured over X<sub>1</sub> which is -pi/2.  a1 is a distance from Z1 to Z2 along X1, which is 0.35 (joint2 x= 0.35, join1 x = 0 ), d<sub>2</sub> is a signed distance from X<sub>1</sub> to X<sub>2</sub> along Z<sub>2</sub> which is apparently equal to 0 ( O<sub>1</sub> and O<sub>2</sub> are on the same line no matter how joints 1 and 2 rotate and  Z<sub>2</sub> is perpendicular to that line).   On the kinematic picture Kuka is drawn in zero configuration with a constant -90 degrees offset between X<sub>1</sub> and X<sub>2</sub>, thus θ<sub>2</sub> being a variable parameter is defined as θ<sub>2</sub> - pi/2, thus we get the raw 2
+α<sub>1</sub> is an angle between Z<sub>1</sub> and Z<sub>2</sub> measured over X<sub>1</sub> which is -pi/2.  a1 is a distance from Z1 to Z2 along X1, which is 0.35 (joint2 x= 0.35, join1 x = 0 ), d<sub>2</sub> is a signed distance from X<sub>1</sub> to X<sub>2</sub> along Z<sub>2</sub> which is apparently equal to 0 ( O<sub>1</sub> and O<sub>2</sub> define the line which  Z<sub>2</sub> is perpendicular to no matter how joints 1 and 2 rotate).   On the kinematic picture Kuka is drawn in zero configuration with a constant -90 degrees offset between X<sub>1</sub> and X<sub>2</sub>, thus θ<sub>2</sub> being a variable parameter is defined as θ<sub>2</sub> - pi/2, thus we get the raw 2
 
 ```
 (  -p2/2, 0.35, 0 , θ<sub>2</sub> - pi/2)
