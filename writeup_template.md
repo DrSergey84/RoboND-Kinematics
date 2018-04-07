@@ -34,14 +34,29 @@ You're reading it!
 ### Kinematic Analysis
 #### 1. Run the forward_kinematics demo and evaluate the kr210.urdf.xacro file to perform kinematic analysis of Kuka KR210 robot and derive its DH parameters.
 
-![Picture 1](./pictures/DH_table.png)
 
 DH table is obtained basing on the below forward kinematics picture and kr210.urdf.xacro file:
 
 ![Picture 1.1](./pictures/forward_kinematics.png)
-
+  
 where
 ![Picture 1.2](./pictures/DH_parameters.png)
+
+The first raw of DH parameters: (  α<sub>0</sub>, a<sub>0</sub>, d<sub>1</sub> , θ<sub>1</sub>)
+α<sub>0</sub>, a<sub>0</sub> are zeroes, θ<sub>1</sub> is a variable. In order to figure d<sub>1</sub> we draw a line from X<sub>0</sub> to X<sub>1</sub> along Z<sub>1</sub> as it is shown on the picture above. Since joint 1 is revolute d<sub>1</sub> is a fixed distance.  By looking at the urdf file we can observe that base joint origin is at <0,0,0> position and join1 is at <0,0,0.33> and joint2 is <0.35,0, 0.42> which leads to d<sub>1</sub> = 0.75 and thus the first raw is
+
+```
+(  0, 0, 0.75 , θ<sub>1</sub>)
+```
+
+α<sub>1</sub> is an angle between Z<sub>1</sub> and Z<sub>2</sub> measured over X<sub>1</sub> which is -pi/2.  a1 is a distance from Z1 to Z2 along X1, which is 0.35 (joint2 x= 0.35, join1 x = 0 ), d<sub>2</sub> is a signed distance from X<sub>1</sub> to X<sub>2</sub> along Z<sub>2</sub> which is apparently equal to 0 ( O<sub>1</sub> and O<sub>2</sub> are on the same line and  Z<sub>2</sub> is perpendicular to that line).   On the kinematic picture Kuka is drawn in zero configuration with a constant -90 degrees offset between X<sub>1</sub> and X<sub>2</sub>, thus θ<sub>2</sub> being a variable parameter is defined as θ<sub>2</sub> - pi/2, thus we get the raw 2
+
+```
+(  -p2/2, 0.35, 0 , θ<sub>2</sub> - pi/2)
+```
+
+
+![Picture 1](./pictures/DH_table.png)
 
 
 
