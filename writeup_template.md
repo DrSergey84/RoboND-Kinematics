@@ -55,6 +55,7 @@ The first raw of DH parameters: (  α<sub>0</sub>, a<sub>0</sub>, d<sub>1</sub> 
 (  -p2/2, 0.35, 0 , θ<sub>2</sub> - pi/2)
 ```
 
+Continue to build the DH parameters further we get the following table:
 
 ![Picture 1](./pictures/DH_table.png)
 
