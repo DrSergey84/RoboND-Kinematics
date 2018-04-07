@@ -37,6 +37,28 @@ Continue to build the DH parameters further we get the following table:
 ![Picture 2.2](./pictures/T4-G.png)
 ![Picture 2.3](./pictures/T_Total.png)
 
+A generalized transform using only end_effector's pos would be:
+```
+R_G = Matrix([ [sin(p)*cos(r)*cos(y) + sin(r)*sin(y), -sin(p)*sin(r)*cos(y) + sin(y)*cos(r), cos(p)*cos(y)], 
+         [sin(p)*sin(y)*cos(r) - sin(r)*cos(y), -sin(p)*sin(r)*sin(y) - cos(r)*cos(y), sin(y)*cos(p)], 
+         [cos(p)*cos(r), -sin(r)*cos(p), -sin(p)]])
+```
+
+where R_G = R_r * R_p *  R_y *  R_corr
+```
+R_r = matrix([[ 1,              0,        0],
+                [ 0,        cos(roll), -sin(roll)],
+                [ 0,        sin(roll),  cos(roll)]])
+
+R_p = matrix([[ cos(pitch),     0,  sin(pitch)],
+                [       0,        1,        0],
+                [-sin(pitch),     0,  cos(pitch)]])
+
+R_y = matrix([[ cos(yaw), -sin(yaw),     0],
+               [ sin(yaw),  cos(yaw),      0],
+               [ 0,              0,        1]])
+
+```
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
 
