@@ -40,8 +40,8 @@ Continue to build the DH parameters further we get the following table:
 A generalized transform using only end_effector's pos would be:
 ```
 R_G = Matrix([ [sin(p)*cos(r)*cos(y) + sin(r)*sin(y), -sin(p)*sin(r)*cos(y) + sin(y)*cos(r), cos(p)*cos(y)], 
-         [sin(p)*sin(y)*cos(r) - sin(r)*cos(y), -sin(p)*sin(r)*sin(y) - cos(r)*cos(y), sin(y)*cos(p)], 
-         [cos(p)*cos(r), -sin(r)*cos(p), -sin(p)]])
+         [sin(p)*sin(y)*cos(r) - sin(r)*cos(y),       -sin(p)*sin(r)*sin(y) - cos(r)*cos(y), sin(y)*cos(p)], 
+         [cos(p)*cos(r),                        -sin(r)*cos(p),                              -sin(p)]])
 ```
 
 where R_G = R_r * R_p *  R_y *  R_corr
