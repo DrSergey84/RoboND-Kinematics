@@ -48,9 +48,6 @@ Selection of the parameters as above has gived me these confusion matrices:
 ![demo-2](./pictures/error_matrix_2.png)
 ![demo-3](./pictures/error_matrix_3.png)
 
-
-![demo-1](https://user-images.githubusercontent.com/20687560/28748231-46b5b912-7467-11e7-8778-3095172b7b19.png)
-
 ### Pick and Place Setup
 
 I have dumped yaml output files  for all the 3 test cases. To run each test case I need to manually change the index in the project_template.py for the pre-trained model being used and scene_num variable in pr2_mover function.
