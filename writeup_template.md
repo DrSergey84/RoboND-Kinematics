@@ -56,6 +56,7 @@ These are the useful points to understand parameters selection for the filter in
 
 1. While testing the project I figured that I detect  more objects that are actually rpesent on the table. That is because if I apply the pass-throuh filter only over 'z' axis as it is decribed in the lectures I do see remains of the dropboxes on the table which is considered as 2 additional objects by the predictor and some random label are getting assigned for those. In order to get rid of the dropboxes in the final could image I do apply pass-through filter first over 'z' and then over 'x' axis.
 2. The input mdoel contains noise that needs to be get rid of. I am applying the noise filter to the final 'outliers' point cloud after RANSAC has been applied. By experimenting with dumping of the pcl images I have selected the the number of neighboring points to 10 and threashold scale factor to 0.2
+3. I will try to continue with the challenge environment. Unfortunately I do not have much time available these days.
 
 ![demo-3](./pictures/RViz.png)
 
