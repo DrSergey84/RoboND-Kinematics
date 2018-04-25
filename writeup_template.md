@@ -34,24 +34,31 @@
 
 You're reading it!
 
-### Exercise 1, 2 and 3 pipeline implemented
-#### 1. Complete Exercise 1 steps. Pipeline for filtering and RANSAC plane fitting implemented.
+### Preparing the models for the tests 1-3 in the project
 
-#### 2. Complete Exercise 2 steps: Pipeline including clustering for segmentation implemented.  
+To prepare the models I tried to follow the steps used in the example 3. I tried to experiment with the different number of training samples and colo/normal histogram threashold. In fact I tried to cheat a bit and let the numpy histogram to select the number of bins automativally proportinal to n<sup>1/3</sup> by selecting bins='auto' ( see here for more details https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.histogram.html). However that doesn't seem to work very well as the training script crashes throwing the error that it cannot assign a sequence as an  array element. Seems like in the 'auto' mode the features array generated becomes sparse ( too many features generated and some of them are even zeroes ) and sklearn does not survive that.  In anyways eventually I have chosen the following parametrs that are seemed to be good enough for all the 3 tests in the project:
+1. color hist bins *64*
+2. normal hist bins left at a default *10*
+3. training samples *50*
+4. Use convertion to HSV
 
-#### 2. Complete Exercise 3 Steps.  Features extracted and SVM trained.  Object recognition implemented.
-Here is an example of how to include an image in your writeup.
+Selection of the parameters as above has gived me these confusion matrices:
+
+![demo-1](./pictures/error_matrix_1.png)
+![demo-2](./pictures/error_matrix_2.png)
+![demo-3](./pictures/error_matrix_3.png)
+
 
 ![demo-1](https://user-images.githubusercontent.com/20687560/28748231-46b5b912-7467-11e7-8778-3095172b7b19.png)
 
 ### Pick and Place Setup
 
-#### 1. For all three tabletop setups (`test*.world`), perform object recognition, then read in respective pick list (`pick_list_*.yaml`). Next construct the messages that would comprise a valid `PickPlace` request output them to `.yaml` format.
+I have dumped yaml output files  for all the 3 test cases. To run each test case I need to manually change the index in the project_template.py for the pre-trained model being used and scene_num variable in pr2_mover function.
 
-And here's another image! 
-![demo-2](https://user-images.githubusercontent.com/20687560/28748286-9f65680e-7468-11e7-83dc-f1a32380b89c.png)
+These are the useful points to understand parameters selection for the filter in  project_template.py:
 
-Spend some time at the end to discuss your code, what techniques you used, what worked and why, where the implementation might fail and how you might improve it if you were going to pursue this project further.  
+1. While testing the project I figured that I detect  more objects that are actually rpesent on the table. That is because if I apply the pass-throuh filter only over 'z' axis as it is decribed in the lectures I do see remains of the dropboxes on the table which is considered as 2 additional objects by the predictor and some random label are getting assigned for those. In order to get rid of the dropboxes in the final could image I do apply pass-through filter first over 'z' and then over 'x' axis.
+2. The input mdoel contains noise that needs to be get rid of. I am applying the noise filter to the final 'outliers' point cloud after RANSAC has been applied. By experimenting with dumping of the pcl images I have selected the the number of neighboring points to 10 and threashold scale factor to 0.2
 
-
+![demo-3](./pictures/RViz.png)
 
