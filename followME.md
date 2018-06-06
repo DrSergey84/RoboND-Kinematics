@@ -76,7 +76,7 @@ it is worth trying to icrease the number of epics as it looks like that the eval
 
 ![image](./training_curve.png)
 
-Could be that the model's architecture does not do well in recognizing small features. One option would be to increase the number of _low dimention layers_ to give it some more weigth in decision making. Potentially the network presented here can be used for other types of the objects like cars or dogs. However obviously if the network has not been trained to recognize the cars then it's weights may not be appropriate to give a good accuracy there, the weights would need to be adjusted by giving it some training set with the right data.
+Could be that the model's architecture does not do well in recognizing small features. One option would be to increase the number of _low dimention layers_ to give it some more weigth in decision making. Incresing the number of epics of the training data with more examples of a *far hero* may also help. Potentially the network presented here can be used for other types of the objects like cars or dogs. However obviously if the network has not been trained to recognize the cars then it's weights may not be appropriate to give a good accuracy there, the weights would need to be adjusted by giving it some training set with the right data.
 
 
 *How can I convert the model into .h5 format?* 
