@@ -74,7 +74,7 @@ it is worth trying to icrease the number of epics as it looks like that the eval
 
 ![image](./training_curve.png)
 
-Could be that the model's architecture does not very well suit this situation.
+Could be that the model's architecture does not very well suit this situation, i.e. we need more layers looking into ( adding more weights ) the small features.
 
 
 
