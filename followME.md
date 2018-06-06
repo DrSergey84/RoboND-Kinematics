@@ -65,11 +65,11 @@ average intersection over union for other people is 0.3538920353087489
 average intersection over union for the hero is 0.24947350865882728
 number true positives: 176, number false positives: 4, number false negatives: 125
 ```
-it is worth trying to icrease the number of epics as it is clearly seen on the images that the evaluation loss just starts to converge to some smal 
-value around epic 5. 
-![image1] (./training_curve.png)
-Could be that the training examples are not good enough for this *far away* case ( not enough of those 
-in the overall images set ) or the model's architecture does not very well suit this situation.
+it is worth trying to icrease the number of epics as it is clearly seen on the images that the evaluation loss just starts to converge to some small value around epic 5. 
+
+![image](./training_curve.png)
+
+Could be that the model's architecture does not very well suit this situation.
 
 
 
