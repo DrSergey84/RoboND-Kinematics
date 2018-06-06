@@ -23,8 +23,11 @@ consuming to train the models this way. The most no-fun project in this course u
     decoder3 = decoder_block(decoder2, layer1, 32)
     x = decoder_block(decoder3, inputs, 16)
     
-    return layers.Conv2D(num_classes, 1, activation='softmax', padding='same')(x)
+    return layers.Conv2D(num_classes, 3, activation='softmax', padding='same')(x)
  ```
+ 
+ The above model is reducing the size (width, height) in the encoder part 2 times on every layer from (160, 160 ) to (10, 10), while incresing the depth 2 times as well from 16 to 128. This hopefully will help the model to recognize big features like the entire humans and the small features as well.  Decoder block is mirroring the encoder with the opposite effect -> doubling the dimentions using bilinear filter eventually calling for layers.Conv2D with 3 filters restoring the original 160x160x3 inputs.
+ 
 ##  Training parameters
 ```
 learning_rate = 0.02
@@ -57,6 +60,8 @@ average intersection over union for other people is 0.28636055903141044
 average intersection over union for the hero is 0.86331796725804
 number true positives: 539, number false positives: 1, number false negatives: 0
 ```
+![image](./follow_target.png)
+
 However when the object is far away the model can detect it right in a slightly bigger than a half of the cases:
 ```
 number of validation samples intersection over the union evaulated on 322
@@ -65,7 +70,7 @@ average intersection over union for other people is 0.3538920353087489
 average intersection over union for the hero is 0.24947350865882728
 number true positives: 176, number false positives: 4, number false negatives: 125
 ```
-it is worth trying to icrease the number of epics as it is clearly seen on the images that the evaluation loss just starts to converge to some small value around epic 5. 
+it is worth trying to icrease the number of epics as it looks like that the evaluation loss just starts to converge to some small value around epic 5. 
 
 ![image](./training_curve.png)
 
