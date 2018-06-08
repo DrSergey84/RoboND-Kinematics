@@ -1,8 +1,8 @@
  # Setup
 I have spent a lot of time ( or should I say wasted ) to setup environment for this project. Every single step from setting up 
-the simulator to running the AWS instance with tensorflow-gpu had issues to me that I had hard time to overcome. I wasted days on those 
-things and eventually  gave up on settng up the GPU based deep learning and  stick to CPU even though it was too time 
-consuming to train the models this way. The most no-fun project in this course unfortunately. 
+the simulator to running the AWS instance with tensorflow-gpu had issues to me that I had hard time to overcome. I tried to find for anything Udacity related on AWS Marketplace, but the filter gave me only "Bitfusion Ubuntu 14 TensorFlow". There was nothing like *GTA Robotics* or anything with word Robotics in it.
+
+I wasted days on those things and eventually  gave up on settng up the GPU based deep learning and  stick to CPU even though it was too time consuming to train the models this way. The most no-fun project in this course unfortunately.  
 
 # Project
  ## Model
